@@ -25,13 +25,13 @@ io.on('connection', socket => {
             room: user.room,
             users: getUsersRoom(user.room)
         });
-    })
+    });
     // console.log('New connection :)');
 
     socket.on('chatMessage', msg => {
         const user = getCurrentUser();
         io.to(user.room).emit('message', formateMessage(user.username, msg))
-    })
+    });
     socket.on('disconnect', () => {
         const user = userLeft(socket.id);
 
@@ -43,14 +43,14 @@ io.on('connection', socket => {
                 room: user.room,
                 users: getUsersRoom(user.room)
             });
-        }
+        };
 
     });
 
 });
 
 let PORT = 3000 || process.env.PORT;
-io.listen(server)
+io.listen(server);
 server.listen(PORT, () => {
     console.log(`application running on port ${PORT}`)
-})
+});
